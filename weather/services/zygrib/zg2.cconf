@@ -1,0 +1,13 @@
+# cURL config file
+# zyGrib download file from server.
+-v
+-i
+-L
+-A "Mozilla/5.0"
+#-A "zyGrib_unx/7.0.0"
+-H "Host: www.zygrib.org"
+-H "Range: 73878-11134956"
+-H "Connection: Keep-Alive"
+-H "Accept-Encoding: gzip"
+-H "Accept-Language: en-US,*"
+--url "http://www.zygrib.org/noaa/313O562/20160127_233136_%20"

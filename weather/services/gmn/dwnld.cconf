@@ -1,0 +1,47 @@
+### Global Marine Network dwnld.
+
+
+### Output debug level.
+#--silent
+#--trace-ascii -
+#--verbose
+
+### Header configs.
+--include
+-A "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:17.0) Gecko/20100101"
+#--referer "http://tidetech.com"
+--referer "http://http://www.globalmarinenet.com"
+# Follow location headers.
+--location
+
+### Cookies
+#--dump-header headers_and_cookies
+#--cookie nada
+--cookie cookies.txt
+--cookie-jar cookies.txt
+
+
+### URL and form data
+#--data-urlencode "user_email= user_password= redirect_url=http://www.tidetech.org/files/samples/GLOBAL_METEO/WIND/GLOBAL_0.5deg_wind_10m.grb.bz2"
+#-d "user_email=&user_password=0&redirect_url=%2Fprofile%2F"
+
+#--data-urlencode "user_email=arch.arch@gmail.com user_password=midgets redirect_url=/"
+#--url "http://www.tidetech.org/login/"
+#--url "http://posttestserver.com/post.php"
+-o "aaa.grb"
+
+--url "http://gribs2.gmn-usa.com/cgi-bin/weather_fetch.pl?parameter=wind&days=7&region=Pacific&dataset=nww3"
+# http://gribs2.gmn-usa.com/cgi-bin/weather_fetch.pl?parameter=wind&days=7&region=Atlantic&dataset=nww3
+# http://gribs2.gmn-usa.com/cgi-bin/weather_fetch.pl?parameter=wave&days=7&region=Atlantic&dataset=nww3
+
+
+### Output option
+#-o "/dev/null"
+
+
+# Echo HTTP request header bodies:
+# http://www.posttestserver.com
+# http://httpbin.org/ This one seems to not be working with post.
+# http://onlinecurl.com/ curl from the cloud.
+# save with same name as orig file. curl -O http://server1.cyberciti.biz/file.tar.gz
+

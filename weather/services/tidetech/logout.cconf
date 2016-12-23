@@ -1,0 +1,27 @@
+### Tide Tech logout.
+
+
+### Output debug level.
+--silent
+#--trace-ascii
+#--verbose
+
+### Header configs.
+--include
+-A "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:17.0) Gecko/20100101"
+--referer "http://www.tidetech.org/profile/"
+--location
+
+### Cookies
+#--dump-header headers_and_cookies
+#--cookie nada
+--cookie cookies.txt
+--cookie-jar cookies.txt
+
+
+### URL and form data
+--url "http://www.tidetech.org/logout/"
+
+
+### Output option
+-o "/dev/null"

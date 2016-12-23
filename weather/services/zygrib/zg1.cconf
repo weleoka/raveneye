@@ -1,0 +1,15 @@
+# cURL config file
+# zyGrib generate file on server.
+-v
+-i
+-L
+#-A "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:17.0) Gecko/20100101 Firefox/17.0"
+-A "zyGrib_unx/7.0.0"
+-H "Range: 73878-11134956"
+-H "Connection: Keep-Alive"
+-H "Accept-Encoding: gzip"
+-H "Accept-Language: en-US,*"
+#--url "http://www.gnu.org/software/gettext/manual/gettext.html"
+--url "http://www.zygrib.org/noaa/getzygribfile025.php?but=prepfile&la1=55&la2=50&lo1=5&lo2=10&res=1&hrs=12&jrs=3&par=W;&rungfs=last&l=a07622b82b18524d2088c9b272bb3feeb0eb1737&m=61c9b2b17db77a27841bbeeabff923448b0f6388&client=zyGrib_unx-7.0.0&tm=202226"
+#--url "www.cataba.tk"
+-o "curlout.html"
