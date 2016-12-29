@@ -18,14 +18,22 @@ http://www.dolink.fr
 
 from lxml import html
 import requests
+import sys
 import re
 import json
 
+import ravencore.main.config as raven_conf
 from ravencore.utils.exceptions import *
+import ravencore.utils.logging
+import ravencore.utils.helpers
+
 
 class Dolink:
     """
     Class representing the Dolink tracker.
+
+    If debug is enabled an artificial position is supplied. 
+    No HTTP request has to be made. No network needed etc.
     """
 
     def __init__(self, parameters):
@@ -38,14 +46,12 @@ class Dolink:
         return:
             void
         """
+        name = '.'.join([__name__, self.__class__.__name__])
+        self.logger = ravencore.utils.logging.getLogger(name) # Make a logger for this class.
 
-        self.type = 'dolink'
         self.debug = parameters['debug']
         self.address = parameters['address']
         self.http_headers = parameters['http_headers']
-
-        if parameters['type'] != self.type:
-            raise("Incorrect tracker type.")
 
         self.site_data = None # JSON from site.
 
@@ -64,7 +70,7 @@ class Dolink:
         # self.updated_xpath = '//span[@class="lastUpdate"]/text()'
 
         self.page = None # The request instance.
-        self.page_html_raw = None # The HTML from tracker.
+        # self.page_html_raw = None # The HTML from tracker. Depreciated.
 
 
     def get_position(self):
@@ -85,19 +91,20 @@ class Dolink:
             self.page = requests.get(self.address, self.http_headers)
 
             try:
-                pass # DEBUG. Dont send requests!
-
                 self.site_data = json.loads(self.page.text)
 
             except json.decoder.JSONDecodeError:
-
-                raise RavenException("Dolink tracker; unable to parse JSON object.")
-
+                self.logger.debug("Unable to update user position from Dolink tracker. (JSON decode error)")
+                #raise RavenException("Dolink tracker; unable to parse JSON object.")
+                return False
 
             tmp = self.site_data.get('markers')[0]
             rcvd_pos = tmp.get('position')
+            self.logger.debug("New user position (updated: %s) from Dolink tracker." 
+                % (ravencore.utils.helpers.to_utc(rcvd_pos['date'])))
 
         else:
+            self.logger.debug("Debug mode is on. Artificial position supplied.")
             rcvd_pos = {
                     'longitude': '-61.584721',
                     'latitude': '15.870019',
@@ -114,7 +121,7 @@ class Dolink:
             'pid': rcvd_pos['pid']
         }
 
-        return self.position
+        return True
 
 
 
@@ -214,6 +221,7 @@ class Dolink:
 
 
 def main():
-    pass
+    print("Can't run without input parameters from wrapper classes.")
+    sys.exit()
 
 if __name__ == '__main__': main()

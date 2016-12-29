@@ -2,11 +2,10 @@
 # Copyright (c) 2017 Kai Weeks.
 # See LICENSE for details.
 
-Module handling requests/queries and responses/replies regarding saildocs service.
+Module handling requests/queries and responses/replies regarding Raven saildocs service.
 """
 
-import ravencore.main.config as raven_conf
-from ravencore.utils.helpers import merge_two_dicts
+
 
 from latlon.latlon.latlon import Longitude, Latitude, LatLon
 
@@ -16,18 +15,16 @@ class Saildocs_query:
     Class representing a query to saildocs weather service.
     """
 
-    def __init__(self, user_instance, grib_instance):
+    def __init__(self, grib_instance):
         """
         Constructor for class.
 
         parameters:
-            user_instance: obj. The user. # Not currently used.
             grib_instance: obj. The grib.
 
         return:
             void
         """
-        self.user_instance = user_instance
         self.grib_instance = grib_instance
 
         self.query_string = None # The query, ready for sending to saildocs.
@@ -93,33 +90,25 @@ class Saildocs_query:
         self.query_string = ''.join(str(x) for x in qstr)
 
 
-    def build_request(self):
+    def build_job_parameters(self):
         """
-        Make a request data structure.
+        Make a job data structure.
 
         parameters:
 
         returns:
-            dict. The request dictionary.
+            dict. The job dictionary.
         """
-        raven_system = raven_conf.userdb.get('user1')
 
-        mail = {
-            'sender': "%s <%s>" % (raven_system['name'], raven_system['email']),
-            'to': 'query@saildocs.com',
-            'subject': '%s: day %s' % (self.user_instance.id, 1),
-            'text': self.query_string,
-        }
-        
-        tmpdict = merge_two_dicts(raven_conf.raven_job['mail'], mail)
-        
         req = {
-            'userid': 'user1', # The raven system is making the request on behalf of real user.
             'request_carrier': 'mail',
-            'mail': tmpdict
+            'mail_parameters': {
+                'to': 'query@saildocs.com',
+                'text': self.query_string,
+            },
         }
 
-        return merge_two_dicts(raven_conf.raven_job, req)
+        return req
 
         
 

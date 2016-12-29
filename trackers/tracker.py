@@ -5,10 +5,11 @@
 Module with class to wrap trackers under.
 
 """
-import logging
 
 import ravencore.main.config as raven_conf
 from ravencore.utils.exceptions import *
+import ravencore.utils.logging
+
 from raveneye.trackers.dolink import Dolink
 
 class Tracker:
@@ -30,7 +31,7 @@ class Tracker:
             void
         """
         name = '.'.join([__name__, self.__class__.__name__])
-        self.logger = logging.getLogger(name) # Make a logger for this class.
+        self.logger = ravencore.utils.logging.getLogger(name) # Make a logger for this class.
 
         self.prefered_tracker_id = prefered_tracker_id
         self.tracker_list = tracker_list
@@ -112,5 +113,9 @@ class Tracker:
         # Add the tracker details to position data.
         self.tracker.position['position_source'] = (self.tracker_type, self.prefered_tracker_id)
 
-        return getattr(self.tracker, 'position')
+        self.position = self.tracker.position
+        
+        
+
+        return True
 
