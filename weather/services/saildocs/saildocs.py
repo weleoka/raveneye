@@ -9,6 +9,8 @@ Module handling requests/queries and responses/replies regarding Raven saildocs 
 
 from latlon.latlon.latlon import Longitude, Latitude, LatLon
 
+from ravencore.coms.mail import Mail_out
+
 
 class Saildocs_query:
     """
@@ -99,13 +101,15 @@ class Saildocs_query:
         returns:
             dict. The job dictionary.
         """
-
+        mail_params = {
+            'to': 'query@saildocs.com',
+            'text': self.query_string,
+        }
+        mail_out = Mail_out(mail_params)
+        
         req = {
             'request_carrier': 'mail',
-            'mail_parameters': {
-                'to': 'query@saildocs.com',
-                'text': self.query_string,
-            },
+            'mail_parameters': mail_out.id
         }
 
         return req
