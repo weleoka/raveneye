@@ -1,3 +1,11 @@
+### raveneye versions
+
+0.1beta - Current development version.
+
+Version specified in README, CHANGELOG, commit tag
+
+
+
 # raveneye
 data gathering modules for raven
 
