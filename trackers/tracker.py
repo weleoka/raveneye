@@ -31,7 +31,7 @@ class Tracker:
             void
         """
         name = '.'.join([__name__, self.__class__.__name__])
-        self.logger = ravencore.utils.logging.getLogger(name) # Make a logger for this class.
+        self.logger = ravencore.utils.logging.getLogger(name) 
 
         self.prefered_tracker_id = prefered_tracker_id
         self.tracker_list = tracker_list
