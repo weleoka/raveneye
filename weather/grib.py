@@ -22,22 +22,24 @@ class Grib():
                     'forecast_length': 96, # 12, 24, 48, 72, 96 (Not 36!?) hours.
         """
 
-        self.latmin = None
-        self.latmax = None
+        [setattr(self, attr, value) for attr, value in parameters]
 
-        self.lonmin = None
-        self.lonmax = None
+        # self.latmin = None
+        # self.latmax = None
 
-        self.model = parameters['model']
+        # self.lonmin = None
+        # self.lonmax = None
 
-        self.resolution = parameters['resolution'] # 0.25, 0.5, 1.0, 2.0
+        # self.model = parameters['model']
 
-        self.issue = parameters['issue']
+        # self.resolution = parameters['resolution'] # 0.25, 0.5, 1.0, 2.0
 
-        self.timestep = parameters['timestep']
-        self.forecast_length = parameters['forecast_length']
+        # self.issue = parameters['issue']
 
-        self.layers = parameters['layers']
+        # self.timestep = parameters['timestep']
+        # self.forecast_length = parameters['forecast_length']
+
+        # self.layers = parameters['layers']
 
 
 

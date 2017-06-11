@@ -101,15 +101,9 @@ class Saildocs_query:
         returns:
             dict. The job dictionary.
         """
-        mail_params = {
-            'to': 'query@saildocs.com',
-            'text': self.query_string,
-        }
-        mail_out = Mail_out(mail_params)
-        
         req = {
-            'request_carrier': 'mail',
-            'mail_parameters': mail_out.id
+                'to': 'query@saildocs.com',
+                'text': self.query_string,
         }
 
         return req
