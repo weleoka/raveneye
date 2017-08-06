@@ -32,8 +32,11 @@ class Dolink:
     """
     Class representing the Dolink tracker.
 
+    The DoLink will give a JSON formatted string ready for json.loads
+    which saves a lot of pain with XPaths etc.
+
     If debug is enabled an artificial position is supplied. 
-    No HTTP request has to be made. No network needed etc.
+    No HTTP request has to be made. No network needed.
     """
 
     def __init__(self, parameters):
