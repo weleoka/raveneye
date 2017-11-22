@@ -31,7 +31,7 @@ class Tracker:
             void
         """
         name = '.'.join([__name__, self.__class__.__name__])
-        self.logger = ravencore.utils.logging.getLogger(name) 
+        self.logger = ravencore.utils.logging.getLogger(name)
 
         self.prefered_tracker_id = prefered_tracker_id
         self.tracker_list = tracker_list
@@ -62,11 +62,11 @@ class Tracker:
 
             # Identify and instansiate the service with user parameters.
             if self.tracker_type == 'dolink':
-                self.tracker = Dolink(self.selected_tracker) 
+                self.tracker = Dolink(self.selected_tracker)
 
         else:
 
-            raise RavenException("No such supported tracker: %s" % (self.selected_tracker['type']))    
+            raise RavenException("No such supported tracker: %s" % (self.selected_tracker['type']))
 
 
     def select_tracker(self, tracker_id):
@@ -87,7 +87,7 @@ class Tracker:
             raise RavenException("Currently have to manually choose preferred tracker")
 
         try:
-            
+
             return self.tracker_list.get(tracker_id) # Get the trackers data.
 
         except KeyError:
@@ -114,8 +114,7 @@ class Tracker:
         self.tracker.position['position_source'] = (self.tracker_type, self.prefered_tracker_id)
 
         self.position = self.tracker.position
-        
-        
+
+
 
         return True
-

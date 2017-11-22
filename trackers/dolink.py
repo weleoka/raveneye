@@ -10,8 +10,6 @@ Functions to request web site and then use parser to gather data and return.
 
 Tracker:
 http://www.dolink.fr
-
-
 <span class="mousePosition">Lat: 15° 52' 05" N -&nbsp;Lon: 61° 35' 06" W</span>
 <span class="lastUpdate">Màj: 18/12 - 18:19:37</span>
 """
@@ -125,102 +123,6 @@ class Dolink:
         }
 
         return True
-
-
-
-
-
-
-
-
-
-
-    def parse_site_html(self):
-        """ DEPRECIATED
-        Parse html document to gather required data.
-
-        parameters:
-
-        returns:
-            position: string. The position data.
-            updated: string. The positions time stamp.
-        """
-        # Hunt the web page for what we need.
-        #position_raw = self.html_raw.xpath(self.position_xpath)
-        #updated_raw = self.html_raw.xpath(self.updated_xpath)
-
-        # Keep the old data.
-        self.position_old = self.position
-        self.updated_old = self.updated
-
-        # Update object attributes with new data.
-        #self.position = self.parse_position_string(position_raw)
-        #self.updated = self.parse_updated_string(updated_raw)
-
-
-    def parse_updated_string(self, updated_str):
-        """ DEPRECIATED
-        Parse updated string to get usable data.
-
-        parameters:
-            updated_str: string. The raw updated string from HTML document.
-                # Màj: 18/12 - 18:19:37 to # "DDMMYY:HHMM" (proposed)
-
-        returns:
-            void.
-        """
-        self.position = "I dont care right now: " + updated_str# "DDMMYY:HHMM"
-
-
-    def parse_position_string(self, position_str):
-        """ DEPRECIATED
-        Parse position string to get usable data.
-
-        parameters:
-            position_str: string. The raw position string from HTML document.
-                # Lat: 15° 52' 05" N -&nbsp;Lon: 61° 35' 06" W
-
-        returns:
-            lat: dict. The latitude.
-            lon: dict. The longitude.
-        """
-
-        pattern = re.compile('''
-            (               # Parenthesis keep the match when string is split.
-                \d{1,3}     # A number between 1 and 3 digits long.
-                |           # OR
-                \s[A-Z]\s   # Space, single letter(uppercase), space.
-            )
-        ''', re.VERBOSE)
-        #-['Lat: ', '15', '° ', '52', "' ", '05', '"', ' N ', '-&nbsp;Lon: ', '61', '° ', '35', "' ", '06', '" W']
-        # tmp_arr = re.match(pattern, position_str)
-        # print("Different: %s" % (tmp_arr))
-        print(position_str)
-        position_str[0].split('-&nbsp;')
-        raw_lat_arr = re.split(pattern, position_str[0])
-        raw_lon_arr = re.split(pattern, position_str[1])
-
-        for item in raw_lat_arr:
-            item.strip()
-
-        for item in raw_lon_arr:
-            item.strip()
-
-        print(tmp_arr)
-        print(raw_lat_arr)
-        print(raw_lon_arr)
-
-        self.position = "%s %s %s %s;%s %s %s %s" % (
-            raw_lat_arr[1],
-            raw_lat_arr[3],
-            raw_lat_arr[5],
-            raw_lat_arr[7],
-            raw_lon_arr[1],
-            raw_lon_arr[3],
-            raw_lon_arr[5],
-            raw_lon_arr[7]
-        )
-
 
 
 def main():
