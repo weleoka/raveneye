@@ -84,7 +84,7 @@ class Saildocs_query:
         
         for layer in g.layers:
             i += 1
-            qstr.append(layer)
+            qstr.append(layer.upper())
 
             if i < len(g.layers):
                 qstr.append(',')
