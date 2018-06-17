@@ -1,5 +1,5 @@
 """
-# Copyright (c) 2017 Kai Weeks.
+# Copyright (c) 2018 Kai Weeks.
 # See LICENSE for details.
 
 Module with class to wrap trackers under.

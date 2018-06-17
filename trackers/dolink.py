@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-# Copyright (c) 2017 Kai Weeks.
+#
+# Copyright (c) 2018 Kai Weeks.
 # See LICENSE for details.
 """
 Instructions for scraping GPS tracker data from dolink tracker.
